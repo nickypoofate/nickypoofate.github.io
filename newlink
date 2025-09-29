@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Expiring Mailto</title>
+  <script>
+    // Expiry date/time (UTC)
+    const expiry = new Date("2025-10-01T09:30:00Z");
+
+    // Email details
+    const to = "nicklaus@tulsasymphony.org";
+    const subject = "I Attended Harvest Wind Quintet!";
+    const body = "Hello,%0A%0AI attended the concert and would like to claim my tickets for the Classics Concert on October 4th.%0A%0A";
+
+    if (new Date() < expiry) {
+      // Still valid → redirect to mailto link with subject + body
+      window.location.href = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${body}`;
+    } else {
+      // Expired → show a message
+      document.addEventListener("DOMContentLoaded", () => {
+        document.body.innerHTML = "<h2>Sorry, this link has expired.</h2>";
+      });
+    }
+  </script>
+</head>
+<body>
+  <p>Loading…</p>
+</body>
+</html>
